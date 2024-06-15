@@ -158,6 +158,70 @@ public class LinkedList {
         return temp; // Retorna o nó removido
     }
 
+
+
+    public Node get(int index) {
+        if(index < 0 || index >= length) return null;
+
+        Node temp = head;
+
+        for (int i = 0; i < index; i++) {
+            temp = temp.next;
+        }
+
+        return temp;
+    }
+    public boolean set(int index, String data) {
+            Node temp = get(index);
+
+            if(temp != null) {
+                temp.data = data;
+                return true;
+            }
+
+            return false;
+    }
+
+
+
+    public boolean insert(int index, String data) {
+        if(index < 0 || index >= length) return false;
+        if(index == 0) {
+            prepend(data);
+            return true;
+        }
+        if(index == length) {
+            append(data);
+            return true;
+        }
+
+        Node newNode = new Node(data);
+        Node temp = get(index -1 );
+        newNode.next = temp.next;
+        temp.next = newNode;
+        length++;
+        return true;
+    }
+
+
+    public Node remove(int index) {
+        if (index < 0 || index >= length) return null;
+        if (index == 0) return removeFirst();
+        if (index == length -1) return removeLast();
+
+        Node prev = get(index - 1);
+        Node temp =  prev.next;
+
+        prev.next = temp.next;
+        temp.next =null;
+        length--;
+
+        return temp;
+    }
+
+
+
+
     // Método principal para testar a classe LinkedList
     public static void main(String[] args) {
 
@@ -165,18 +229,32 @@ public class LinkedList {
         list.append("produto 2");
         list.append("produto 3");
 
-        list.prepend("produto 4");
-        list.append("produto 5");
-
-        System.out.println("----------");
-        list.getHead();
-        System.out.println("---------");
-        list.getTail();
-        System.out.println("----------");
-        list.getLength();
-        System.out.println("-----------");
+        list.remove(1);
 
         list.print();
+
+
+
+        // list.prepend("produto 4");
+
+        //    list.append("produto 5");
+
+    //    list.insert(3, "elemento 2.5");
+
+    //    System.out.println(list.get(1).data);
+
+    //    list.print();
+    //    list.set(1, "elemento 0.5");
+
+
+//        System.out.println("----------");
+//        list.getHead();
+//        System.out.println("---------");
+//        list.getTail();
+//        System.out.println("----------");
+//        list.getLength();
+//        System.out.println("-----------");
+
 
         // Exemplo de utilização dos métodos de adição, remoção e impressão da lista ligada
     }
